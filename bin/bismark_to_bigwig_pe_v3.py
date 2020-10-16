@@ -66,7 +66,8 @@ def readAllC( allCFileStr, outFileAr ):
 		lineAr = line.rstrip().split('\t')
 		# (0) chr (1) pos (2) strand (3) mC (4) C (5) Cctxt
 		# (6) trintctxt
-		if len(lineAr) < 7:
+		# Skip line if less than 7 elements or if mC+C=0 (this cause a ZeroDivisionError in line 82)
+		if len(lineAr) < 7 or (lineAr[3] + lineAr[4] == 0):
 			continue
 		#elif ( useAll or int(lineAr[3])> 0 ):
 		else:
